@@ -10,31 +10,29 @@ type MCQProps = {
 
 export default function MCQ({mcq, correctAnswers, select}: MCQProps): JSX.Element {
   return (
-    <>
-      <View style={styles.question}>
-        <Text style={styles.prompt}>{mcq.question}</Text>
-        <View style={styles.options}>
-          {mcq.options.map(option => {
-            const isCorrect = correctAnswers.find(ans => ans.id === option.id) !== undefined;
-            const isSelected = mcq.selectedOption !== undefined && mcq.selectedOption!.id === option.id;
-            return (
-              <Option
-                key={option.id}
-                option={option}
-                greenOverride={mcq.selectedOption !== undefined && !isSelected && isCorrect}
-                isCorrect={isCorrect}
-                isSelected={isSelected}
-                onSelect={() => {
-                  if(mcq.selectedOption !== undefined)
-                    return;
-                  select(option)
-                }}
-              />
-            );
-          })}
-        </View>
+    <View style={styles.question}>
+      <Text style={styles.prompt}>{mcq.question}</Text>
+      <View style={styles.options}>
+        {mcq.options.map(option => {
+          const isCorrect = correctAnswers.find(ans => ans.id === option.id) !== undefined;
+          const isSelected = mcq.selectedOption !== undefined && mcq.selectedOption!.id === option.id;
+          return (
+            <Option
+              key={option.id}
+              option={option}
+              greenOverride={mcq.selectedOption !== undefined && !isSelected && isCorrect}
+              isCorrect={isCorrect}
+              isSelected={isSelected}
+              onSelect={() => {
+                if(mcq.selectedOption !== undefined)
+                  return;
+                select(option)
+              }}
+            />
+          );
+        })}
       </View>
-    </>
+    </View>
   );
 }
 
